@@ -1,0 +1,521 @@
+<html><head><base href="." /><title>MacWindows OS</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    
+    body {
+      background: url('file:///home/chronos/u-339a7742bba81e6cc90d041181d094d78f6e95f6/MyFiles/MacWindows/%E7%84%A1%E9%A1%8C%20-%202024-11-21T092922.890.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .taskbar {
+      background: rgba(255,255,255,0.9);
+      height: 50px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      gap: 10px; /* Added gap for spacing between icons */
+    }
+    
+    .start-button {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #FF6B6B, #FF4B4B);
+      margin-right: 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .start-button:hover {
+      transform: scale(1.1);
+    }
+    
+    .menu-bar {
+      background: rgba(255,255,255,0.95);
+      height: 30px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      position: fixed;
+      top: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .apple-logo {
+      font-size: 20px;
+      margin-right: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .window {
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      width: 600px;
+      height: 400px;
+      margin: 80px auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .window-header {
+      background: linear-gradient(90deg, #FF6B6B, #FF4B4B);
+      height: 35px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+    }
+    
+    .window-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .window-button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .close {
+      background: #FF5F56;
+    }
+    
+    .minimize {
+      background: #FFBD2E;
+    }
+    
+    .maximize {
+      background: #27C93F;
+    }
+    
+    .window-content {
+      padding: 20px;
+      height: calc(100% - 35px);
+      overflow-y: auto;
+    }
+    
+    .desktop-icon {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      width: 80px;
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    .desktop-icon:nth-child(2) {
+      left: 120px;
+    }
+    
+    .desktop-icon:nth-child(3) {
+      left: 220px;
+    }
+    
+    .desktop-icon svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 5px;
+    }
+    
+    .desktop-icon span {
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      font-size: 12px;
+      display: block;
+    }
+    
+    .taskbar-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      background: rgba(255,255,255,0.3);
+      padding: 5px;
+    }
+    
+    .taskbar-icon:hover {
+      transform: scale(1.1);
+      background: rgba(255,255,255,0.5);
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Adding new styles for bookmarks */
+    .bookmark-form {
+      padding: 15px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .bookmark-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .bookmark-form button {
+      background: #0078D4;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .bookmark-list {
+      list-style: none;
+    }
+    
+    .bookmark-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      background: rgba(255,255,255,0.8);
+      margin-bottom: 5px;
+      border-radius: 4px;
+    }
+    
+    .bookmark-item a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    
+    .delete-bookmark {
+      background: #FF5F56;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <div class="menu-bar">
+      <div class="apple-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11 11v-11h2v11h11v2h-11v11h-2v-11h-11v-2h11z" transform="rotate(45 12 12)"/>
+        </svg>
+      </div>
+      <span>File</span>
+      <span style="margin-left: 15px; cursor: pointer;" onclick="showAboutWindow()">About</span>
+    </div>
+    
+    <a href="https://www.youtube.com" class="desktop-icon">
+      <svg viewBox="0 0 24 24" fill="red">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      <span>YouTube</span>
+    </a>
+    
+    <a href="https://www.google.com" class="desktop-icon">
+      <svg viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      <span>Google</span>
+    </a>
+    
+    <a href="https://www.nicovideo.jp" class="desktop-icon">
+      <svg viewBox="0 0 24 24" fill="#272727">
+        <path d="M21.75 12c0 5.385-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12 6.615 2.25 12 2.25s9.75 4.365 9.75 9.75zM9.75 7.5a2.25 2.25 0 0 0-2.25 2.25v4.5a2.25 2.25 0 0 0 2.25 2.25h4.5a2.25 2.25 0 0 0 2.25-2.25v-4.5a2.25 2.25 0 0 0-2.25-2.25h-4.5z"/>
+      </svg>
+      <span>NicoNico</span>
+    </a>
+    
+    <div class="taskbar">
+      <div class="start-button"></div>
+      
+      <a href="https://www.youtube.com" class="taskbar-icon">
+        <svg viewBox="0 0 24 24" fill="red">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+    
+      <a href="https://www.twitter.com" class="taskbar-icon">
+        <svg viewBox="0 0 24 24" fill="#1DA1F2">
+          <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"/>
+        </svg>
+      </a>
+    
+      <a href="https://www.google.com" class="taskbar-icon">
+        <svg viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+      </a>
+    
+      <a href="https://www.github.com" class="taskbar-icon">
+        <svg viewBox="0 0 24 24" fill="#24292e">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+    </div>
+    
+    <script>
+    class BookmarkManager {
+      constructor() {
+        this.bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+        this.updateTaskbar();
+      }
+    
+      addBookmark(title, url) {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          url = 'https://' + url;
+        }
+        
+        this.bookmarks.push({ title, url });
+        this.saveBookmarks();
+        this.renderBookmarks();
+        this.updateTaskbar();
+      }
+    
+      deleteBookmark(index) {
+        this.bookmarks.splice(index, 1);
+        this.saveBookmarks();
+        this.renderBookmarks();
+        this.updateTaskbar();
+      }
+    
+      saveBookmarks() {
+        localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks));
+      }
+    
+      renderBookmarks() {
+        const bookmarkList = document.getElementById('bookmarkList');
+        if (!bookmarkList) return;
+        
+        bookmarkList.innerHTML = '';
+        
+        this.bookmarks.forEach((bookmark, index) => {
+          const li = document.createElement('li');
+          li.className = 'bookmark-item';
+          li.innerHTML = `
+            <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
+            <button class="delete-bookmark" onclick="bookmarkManager.deleteBookmark(${index})">×</button>
+          `;
+          bookmarkList.appendChild(li);
+        });
+      }
+    
+      updateTaskbar() {
+        const taskbar = document.querySelector('.taskbar');
+        if (!taskbar) return;
+        
+        const existingBookmarks = taskbar.querySelectorAll('.bookmark-taskbar-icon');
+        existingBookmarks.forEach(bookmark => bookmark.remove());
+    
+        this.bookmarks.forEach(bookmark => {
+          const icon = document.createElement('a');
+          icon.href = bookmark.url;
+          icon.className = 'taskbar-icon bookmark-taskbar-icon';
+          icon.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="#0078D4">
+              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+            </svg>
+          `;
+          taskbar.appendChild(icon);
+        });
+      }
+    }
+    
+    class WindowManager {
+      constructor() {
+        this.windows = new Map();
+        this.zIndex = 1000;
+      }
+    
+      createWindow(content, title = '') {
+        const windowId = 'window_' + Date.now();
+        const windowElement = document.createElement('div');
+        windowElement.className = 'window';
+        windowElement.id = windowId;
+        windowElement.style.position = 'absolute';
+        windowElement.style.left = '50%';
+        windowElement.style.top = '50%';
+        windowElement.style.transform = 'translate(-50%, -50%)';
+        windowElement.style.zIndex = this.zIndex++;
+    
+        windowElement.innerHTML = `
+          <div class="window-header">
+            <div class="window-buttons">
+              <div class="window-button close"></div>
+              <div class="window-button minimize"></div>
+              <div class="window-button maximize"></div>
+            </div>
+            <div class="window-title">${title}</div>
+          </div>
+          <div class="window-content">
+            ${content}
+          </div>
+        `;
+    
+        document.body.appendChild(windowElement);
+        this.setupWindowControls(windowElement);
+        return windowElement;
+      }
+    
+      setupWindowControls(windowElement) {
+        const header = windowElement.querySelector('.window-header');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+    
+        header.addEventListener('mousedown', (e) => {
+          if (e.target === header || e.target.classList.contains('window-title')) {
+            isDragging = true;
+            windowElement.style.zIndex = this.zIndex++;
+            
+            const rect = windowElement.getBoundingClientRect();
+            xOffset = rect.left;
+            yOffset = rect.top;
+            
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+          }
+        });
+    
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+    
+            windowElement.style.left = `${currentX}px`;
+            windowElement.style.top = `${currentY}px`;
+            windowElement.style.transform = 'none';
+          }
+        });
+    
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+    
+        // Setup close button
+        const closeButton = windowElement.querySelector('.window-button.close');
+        closeButton.addEventListener('click', () => {
+          windowElement.style.animation = 'fadeOut 0.3s forwards';
+          setTimeout(() => {
+            windowElement.remove();
+          }, 300);
+        });
+    
+        // Bring window to front on click
+        windowElement.addEventListener('mousedown', () => {
+          windowElement.style.zIndex = this.zIndex++;
+        });
+      }
+    }
+    
+    // Initialize managers
+    const bookmarkManager = new BookmarkManager();
+    const windowManager = new WindowManager();
+    
+    function addBookmark() {
+      const titleInput = document.getElementById('bookmarkTitle');
+      const urlInput = document.getElementById('bookmarkUrl');
+      
+      if (titleInput.value && urlInput.value) {
+        bookmarkManager.addBookmark(titleInput.value, urlInput.value);
+        titleInput.value = '';
+        urlInput.value = '';
+      }
+    }
+    
+    // Show About window
+    function showAboutWindow() {
+      const aboutContent = `
+        <h2>About Hikariboshi N (避雷針エヌ)</h2>
+        <div style="padding: 20px;">
+          <p style="line-height: 1.6;">
+            避雷針エヌ (Hikariboshi N) is a Vtuber and Hyperfliper who makes with AI in the metropolitan area, <br>
+            creating “coexistence with destruction and AI”. <br>
+            We are active in Soundcloud.
+          </p>
+          <p style="margin-top: 15px; line-height: 1.6;">
+            Version: 1.0.0<br>
+            Build: 2024.01<br>
+            © 2024 Hikariboshi N<br>
+            The foundation of this site was created by <a href=“https://websim.ai”>Websim</a>.
+          </p>
+        </div>
+      `;
+      windowManager.createWindow(aboutContent, 'About');
+    }
+    
+    // Modify the start button click handler
+    document.querySelector('.start-button').addEventListener('click', () => {
+      const bookmarkContent = `
+        <h2>Bookmark Manager</h2>
+        <div class="bookmark-form">
+          <input type="text" id="bookmarkTitle" placeholder="Enter website name">
+          <input type="url" id="bookmarkUrl" placeholder="Enter website URL">
+          <button onclick="addBookmark()">Add Bookmark</button>
+        </div>
+        <ul class="bookmark-list" id="bookmarkList"></ul>
+      `;
+      const window = windowManager.createWindow(bookmarkContent, 'Bookmark Manager');
+      bookmarkManager.renderBookmarks();
+    });
+    </script>
+    </body></html>
